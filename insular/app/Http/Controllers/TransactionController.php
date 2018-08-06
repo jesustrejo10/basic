@@ -240,9 +240,9 @@ class TransactionController extends Controller
 
     public function getTransactionById($transactionId){
 
-        $persistentTransaction = Transaction::find($transactionId);
+        $transaction = Transaction::find($transactionId);
 
-        if($persistentTransaction == null){
+        if($transaction == null){
             $response = new BaseResponse();
 
             //$response-> data= "[]";
@@ -252,18 +252,30 @@ class TransactionController extends Controller
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }
 
-        $persistentTransaction ->natural_person = NaturalPerson::find($persistentTransaction->natural_person_id);
+        $transactionOwnerId = $transaction->user_id;
+        $transactionOwner = User::find($transactionOwnerId);
+        $transactionOwnerName = $transactionOwner->first_name . " ". $transactionOwner->last_name;
+        $transaction->transaction_owner_name = $transactionOwnerName;
+        $transaction->transactionOwner = $transactionOwner;
+        $exchangeRateId = $transaction->exchange_rate_id;
+        $exchangeRate = ExchangeRate::find($exchangeRateId);
+        $exchangeRateValue = $exchangeRate->bsf_mount_per_dollar;
 
-        $persistentTransaction ->statues = StatusPerTransaction::select()->where('transaction_id',$persistentTransaction->id)->get();
+        $transaction->exchange_rate_value =$exchangeRateValue;
+        $transactionBsfAmount = $exchangeRateValue * $transaction->amount_usd;
+        $transaction->total_bsf_amount = $transactionBsfAmount;
 
-        $persistentTransaction ->wallet_movement = WalletTransaction::find($persistentTransaction->movement_id);
-        //$movements = WalletTransaction::select('amount')->where('wallet_id', $walletId)->get();
+        $transactionNaturalPersonId = $transaction->natural_person_id;
+        $transactionNaturalPerson = NaturalPerson::find($transactionNaturalPersonId);
+        $transaction -> natural_person = $transactionNaturalPerson;
 
-        $persistentTransaction ->exchange_rate = ExchangeRate::find($persistentTransaction->exchange_rate_id);
+        $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->get();
+        $transaction->history = $transactionStatuses;
+        $transaction ->wallet_movement = WalletTransaction::find($persistentTransaction->movement_id);
 
         $response = new BaseResponse();
 
-        $response-> data= $persistentTransaction;
+        $response-> data= $transaction;
         $response-> message = "success";
         $response ->status = "200";
 

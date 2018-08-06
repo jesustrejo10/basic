@@ -68,6 +68,7 @@ Route::get('transactions/user/{id}','TransactionController@getTransactionByUser'
 */
 Route::post('wallet/deposit','WalletController@generateDepositRequest')->middleware('bearer');
 Route::get('wallet/balance/{id}','WalletTransactionController@getBalanceByWallet')->middleware('bearer');
+Route::post('wallet/request_stripe_deposit','WalletController@generateDepositStripe')->middleware('bearer');
 
 /*
 |--------------------------------------------------------------------------
@@ -82,5 +83,3 @@ Route::get('banks/list','VenezuelanBankController@getAllBanks');
 
 Route::apiResource('natural_people','NaturalPersonController');
 Route::post('natural_people/{id}','NaturalPersonController@updateNaturalPerson');
-
-
