@@ -137,52 +137,103 @@ class WalletController extends Controller
 
 
     public function generateDepositStripe(Request $request){
+      //Validate the request and valid $amount
 
-      $stripe = Stripe::make('sk_test_J8KTqrjMw9DUbVICSdwtDZzk');
-           try {
-             /*
-                $token = $stripe->tokens()->create([
-                    'card' => [
-                        'number'    => '4242424242424242',
-                        'exp_month' => '10',
-                        'exp_year'  => '2018',
-                        'cvc'       => '123',
-                    ],
-                ]);
-                if (!isset($token['id'])) {
-                    \Session::put('error','The Stripe Token was not generated correctly');
-                    return ('error The Stripe Token was not generated correctly');
-                }*/
-                $cardToken = $request->get('token');
-                $amount = $request->get('amount');
+       $cardToken = $request->get('token');
+       $amount = $request->get('amount');
+       $userId = $request->get('user_id');
+       $walletId = $request->get('wallet_id');
+      if($cardToken == null){
+        $response = new BaseResponse();
 
-                $charge = $stripe->charges()->create([
-                    'card' => $cardToken,
-                    'currency' => 'USD',
-                    'amount'   => $amount,
-                    'description' => 'Add in wallet',
-                ]);
-                if($charge['status'] == 'succeeded') {
+        //$response-> data= "[]";
+        $response-> message = "Error, the card token is required.";
+        $response ->status = "500";
 
-                    //Write Here Your Database insert logic.
+        return json_encode($response,JSON_UNESCAPED_SLASHES);
+      }
 
-                    \Session::put('success','Money add successfully in wallet');
-                    return 'success Money add successfully in wallet';
-                } else {
-                    \Session::put('error','Money not add in wallet!!');
-                    return 'error Money not add in wallet!! por else';
-                }
-            } catch (Exception $e) {
-                \Session::put('error',$e->getMessage());
-                return 'error Money not add in wallet!! por exception 1';
-            } catch(\Cartalyst\Stripe\Exception\CardErrorException $e) {
-                \Session::put('error',$e->getMessage());
-                return 'error Money not add in wallet!! por exception 2';
-            } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
-                \Session::put('error',$e->getMessage());
-                dd ($e);
-                return 'error Money not add in wallet!! por exception 3';
-            }
+      if($amount ==null){
+        $response = new BaseResponse();
+
+        //$response-> data= "[]";
+        $response-> message = "Error, the amount is required.";
+        $response ->status = "500";
+
+        return json_encode($response,JSON_UNESCAPED_SLASHES);
+      }
+
+      if($amount > 5000){
+        $response = new BaseResponse();
+
+        //$response-> data= "[]";
+        $response-> message = "Error, El monto máximo permitido por deposito es del $5000.";
+        $response ->status = "500";
+
+        return json_encode($response,JSON_UNESCAPED_SLASHES);
+      }
+      else{
+              $description = 'user:'.$userId.',transaction:'.'123';
+              $stripe = Stripe::make('sk_test_J8KTqrjMw9DUbVICSdwtDZzk');
+                   try {
+                        $charge = $stripe->charges()->create([
+                            'card' => $cardToken,
+                            'currency' => 'USD',
+                            'amount'   => $amount,
+                            'description' => $description,
+                        ]);
+                        if($charge['status'] == 'succeeded') {
+
+                          $walletTransaction = new WalletTransaction($request->all());
+                          $walletTransaction->status = 1;
+                          if($walletTransaction->save()){
+                              $response = new BaseResponse();
+
+                              $response-> data= $walletTransaction;
+                              $response-> message = "success";
+                              $response ->status = "200";
+
+                              return json_encode($response,JSON_UNESCAPED_SLASHES);
+
+                          }else{
+                              $response = new BaseResponse();
+
+                              //$response-> data= "[]";
+                              $response-> message = "Error, please contact the admin";
+                              $response ->status = "500";
+
+                              return json_encode($response,JSON_UNESCAPED_SLASHES);
+                          }
+                        } else {
+                            //\Session::put('error','Money not add in wallet!!');
+                            $response = new BaseResponse();
+                            $response-> message = "Error, no fue posible agregar dinero a su balance.";
+                            $response ->status = "500";
+
+                            return json_encode($response,JSON_UNESCAPED_SLASHES);                        }
+                    } catch (Exception $e) {
+                        //\Session::put('error',$e->getMessage());
+                        $response = new BaseResponse();
+                        $response-> message = "Error, no fue posible agregar dinero a su balance.";
+                        $response ->status = "500";
+
+                    } catch(\Cartalyst\Stripe\Exception\CardErrorException $e) {
+                        //\Session::put('error',$e->getMessage());
+
+                        $response = new BaseResponse();
+                        //$response-> data= "[]";
+                        $response-> message = "Error, no fue posible agregar dinero a su balance.";
+                        $response ->status = "500";
+                    } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
+                        //\Session::put('error',$e->getMessage());
+
+                        $response = new BaseResponse();
+                        //$response-> data= "[]";
+                        $response-> message = "Error, no fue posible agregar dinero a su balance.";
+                        $response ->status = "500";
+                  }
+
+      }
 
     }
 }
