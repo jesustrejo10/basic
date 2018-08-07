@@ -184,8 +184,10 @@ class WalletController extends Controller
                         ]);
                         if($charge['status'] == 'succeeded') {
 
+
                           $walletTransaction = new WalletTransaction($request->all());
                           $walletTransaction->status = 1;
+                          $walletTransaction->stripe_id =$charge['ID'];
                           if($walletTransaction->save()){
                               $response = new BaseResponse();
 
