@@ -13,7 +13,7 @@ use App\BaseResponse;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-
+use App\Wallet;
 
 class TransactionController extends Controller
 {
@@ -271,7 +271,10 @@ class TransactionController extends Controller
 
         $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->get();
         $transaction->history = $transactionStatuses;
-        $transaction ->wallet_movement = WalletTransaction::find($persistentTransaction->movement_id);
+        $transaction ->wallet_movement = WalletTransaction::find($transaction->movement_id);
+
+        $transactionCurrentStatus = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
+        $transaction->current_status = $transactionCurrentStatus;
 
         $response = new BaseResponse();
 
@@ -296,15 +299,29 @@ class TransactionController extends Controller
     }
 
     public function getTransactionByUser($userId){
-        $movements = Transaction::select()->where('user_id', $userId)->get();
+        $user = User::find($userId);
+        $walletTransactions = WalletTransaction::select()->where('wallet_id',$user->wallet_id)->orderByDesc('id')->get();
+
+        //$WalletId = Wallet::select()->where('user_id',$userId)->first();
+
+        foreach ($walletTransactions as $walletTransaction){
+            $transaction = Transaction::select()->where('movement_id', $walletTransaction->id)->first();
+            if($transaction != null){
+              $transactionCurrentStatus = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
+
+              $transaction->current_status = $transactionCurrentStatus;
+              $walletTransaction->transaction = $transaction;
+            }
+        }
 
         $response = new BaseResponse();
 
-        $response-> data= $movements;
+        $response-> data= $walletTransactions;
         $response-> message = "success";
         $response ->status = "200";
 
         return json_encode($response,JSON_UNESCAPED_SLASHES);
+
     }
 
     public function seeAllTransactions(){

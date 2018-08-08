@@ -16,6 +16,7 @@ class CreateWalletTransactionsTable extends Migration
         Schema::create('wallet_transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('wallet_id');
+            $table->string('stripe_id')->nullable();
             $table->integer('status')->nullable();
             $table->float('amount',8,2);
             $table->timestamps();
