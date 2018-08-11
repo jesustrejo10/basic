@@ -475,7 +475,10 @@ class User extends Authenticatable
 
 */
             echo ($request->get('password'));
-            echo($userForPassword->password);
+
+            $encrypted = Crypt::encryptString($userForPassword->password);
+            echo ("<br>");
+            echo($encrypted);
             die();
             if($userForPassword->password == $request->get('password')){
                 $response = new BaseResponse();
