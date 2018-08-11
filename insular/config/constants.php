@@ -14,5 +14,5 @@
 ];*/
 
 //public static $URL= 'localhost:8888/insular-api/insular-api/public/uploads/';
-define( 'URL_UPLOAD', 'http://wedootech.com/insular/insular-api-deploy/public/uploads/');
-define('URL_PASSPORT_IMAGES', 'http://wedootech.com/insular/insular-api-deploy/public/passports/');
+define( 'URL_UPLOAD', 'http://wedootech.com/insular/insular-api-stripe/stripe/public/uploads/');
+define('URL_PASSPORT_IMAGES', 'http://wedootech.com/insular/insular-api-stripe/stripe/public/passports/');
