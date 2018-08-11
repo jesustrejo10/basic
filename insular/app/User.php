@@ -474,8 +474,8 @@ class User extends Authenticatable
             $password == $decryptedPassword // true
 
 */
-            dd($userForPassword->password);
-            dd($request->get('password'));
+            echo ($request->get('password'));
+            echo($userForPassword->password);
             die();
             if($userForPassword->password == $request->get('password')){
                 $response = new BaseResponse();
