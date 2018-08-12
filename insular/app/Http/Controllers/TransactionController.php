@@ -14,6 +14,7 @@ use App\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use App\Wallet;
+use App\VenezuelanBank;
 
 class TransactionController extends Controller
 {
@@ -261,6 +262,7 @@ class TransactionController extends Controller
         $exchangeRate = ExchangeRate::find($exchangeRateId);
         $exchangeRateValue = $exchangeRate->bsf_mount_per_dollar;
 
+
         $transaction->exchange_rate_value =$exchangeRateValue;
         $transactionBsfAmount = $exchangeRateValue * $transaction->amount_usd;
         $transaction->total_bsf_amount = $transactionBsfAmount;
@@ -268,7 +270,9 @@ class TransactionController extends Controller
         $transactionNaturalPersonId = $transaction->natural_person_id;
         $transactionNaturalPerson = NaturalPerson::find($transactionNaturalPersonId);
         $transaction -> natural_person = $transactionNaturalPerson;
-
+        $bankId = $transaction -> natural_person->bank_id;
+        $bank = VenezuelanBank::find($bankId);
+        $transaction->natural_person->bank = $bank;
         $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->get();
         $transaction->history = $transactionStatuses;
         $transaction ->wallet_movement = WalletTransaction::find($transaction->movement_id);
