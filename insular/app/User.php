@@ -474,7 +474,8 @@ class User extends Authenticatable
             $password == $decryptedPassword // true
 
 */
-            if($userForPassword->password == $request->get('password')){
+
+            if(Crypt::decryptString($userForPassword->password) == $request->get('password')){
                 $response = new BaseResponse();
 
                 $response ->status = "200";
