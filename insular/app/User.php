@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -475,16 +474,6 @@ class User extends Authenticatable
             $password == $decryptedPassword // true
 
 */
-            if(
-              Hash::check($request->get('password'),$userForPassword->password) {
-
-              echo ("<br>OK TODO OK");
-
-            } else {
-              echo ("<br>TODO MAL, MALA PASSWORD");
-            }
-
-            die();
             if($userForPassword->password == $request->get('password')){
                 $response = new BaseResponse();
 
