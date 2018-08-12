@@ -475,8 +475,11 @@ class User extends Authenticatable
             $password == $decryptedPassword // true
 
 */
-            if(Hash::check($request->get('password',$userForPassword->password)) {
+            if(
+              Hash::check($request->get('password'),$userForPassword->password) {
+
               echo ("<br>OK TODO OK");
+
             } else {
               echo ("<br>TODO MAL, MALA PASSWORD");
             }
