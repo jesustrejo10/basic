@@ -135,7 +135,6 @@ class WalletController extends Controller
         }
     }
 
-
     public function generateDepositStripe(Request $request){
       //Validate the request and valid $amount
 
@@ -188,6 +187,7 @@ class WalletController extends Controller
                           $walletTransaction = new WalletTransaction($request->all());
                           $walletTransaction->status = 1;
                           $walletTransaction->stripe_id =$charge['id'];
+                          $walletTransaction->total_amount = $amount;
                           if($walletTransaction->save()){
                               $response = new BaseResponse();
 
@@ -210,14 +210,14 @@ class WalletController extends Controller
                             //\Session::put('error','Money not add in wallet!!');
                             $response = new BaseResponse();
                             $response-> message = "Error, no fue posible agregar dinero a su balance.";
-                            $response ->status = "500";
+                            $response ->status = "501";
 
                             return json_encode($response,JSON_UNESCAPED_SLASHES);                        }
                     } catch (Exception $e) {
                         //\Session::put('error',$e->getMessage());
                         $response = new BaseResponse();
                         $response-> message = "Error, no fue posible agregar dinero a su balance.";
-                        $response ->status = "500";
+                        $response ->status = "501";
 
                     } catch(\Cartalyst\Stripe\Exception\CardErrorException $e) {
                         //\Session::put('error',$e->getMessage());
@@ -225,14 +225,14 @@ class WalletController extends Controller
                         $response = new BaseResponse();
                         //$response-> data= "[]";
                         $response-> message = "Error, no fue posible agregar dinero a su balance.";
-                        $response ->status = "500";
+                        $response ->status = "501";
                     } catch(\Cartalyst\Stripe\Exception\MissingParameterException $e) {
                         //\Session::put('error',$e->getMessage());
 
                         $response = new BaseResponse();
                         //$response-> data= "[]";
                         $response-> message = "Error, no fue posible agregar dinero a su balance.";
-                        $response ->status = "500";
+                        $response ->status = "501";
                   }
 
       }

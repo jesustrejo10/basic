@@ -173,6 +173,8 @@ class TransactionController extends Controller
         $walletTransaction = new WalletTransaction();
         $walletTransaction->wallet_id = $request->get('wallet_id');
         $walletTransaction->amount = $request->get('amount_usd') *-1;
+        $walletTransaction->fee = $request->get('fee_amount_usd') *-1;
+        $walletTransaction->total_amount = $request->get('total_amount_usd') *-1;
 
         if($walletTransaction->save()){
 

@@ -107,10 +107,11 @@ class WalletTransactionController extends Controller
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }
 
-        $movements = WalletTransaction::select('amount')->where('wallet_id', $walletId)->get();
+        $movements = WalletTransaction::select('total_amount')->where('wallet_id', $walletId)->get();
+        
         $amount = 0;
         foreach($movements as $movement) {
-            $amount = $amount + ($movement->amount);
+            $amount = $amount + ($movement->total_amount);
         }
 
         $response = new BaseResponse();

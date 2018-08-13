@@ -19,6 +19,8 @@ class CreateWalletTransactionsTable extends Migration
             $table->string('stripe_id')->nullable();
             $table->integer('status')->nullable();
             $table->float('amount',8,2);
+            $table->float('fee',8,2)->default('0');
+            $table->float('total_amount',8,2)->default('0');
             $table->timestamps();
         });
     }
