@@ -267,7 +267,9 @@ class TransactionController extends Controller
 
         $transaction->exchange_rate_value =$exchangeRateValue;
         $transactionBsfAmount = $exchangeRateValue * $transaction->amount_usd;
-        $transaction->total_bsf_amount = $transactionBsfAmount;
+
+        $testNumber = number_format((float)$transactionBsfAmount, 2, '.', '');
+        $transaction->total_bsf_amount = $testNumber;
 
         $transactionNaturalPersonId = $transaction->natural_person_id;
         $transactionNaturalPerson = NaturalPerson::find($transactionNaturalPersonId);
