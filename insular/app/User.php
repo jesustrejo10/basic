@@ -465,15 +465,6 @@ class User extends Authenticatable
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
 
-/*
-            $password = 'pass1234';
-
-            $encryptedPassword = encrypt($password);
-            $decryptedPassword = decrypt($encryptedPassword);
-
-            $password == $decryptedPassword // true
-
-*/
 
             if(Crypt::decryptString($userForPassword->password) == $request->get('password')){
                 $response = new BaseResponse();
