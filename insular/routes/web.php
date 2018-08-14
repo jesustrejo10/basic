@@ -28,5 +28,7 @@ Route::get('/transactions/{id}','TransactionController@seeTransactionDetail')->n
 Route::get('transactions/process/{id}','TransactionController@processTransaction')->name('processTransaction');
 Route::get('transactions/denegate/{id}','TransactionController@denegateTransaction')->name('denegateTransaction');
 Route::get('/exchange_rates','ExchangeRateController@showAllExchangeRates')->name('exchange_rates');
+Route::get('/exchange_rates/generate/','ExchangeRateController@generateExchangeRate')->name('generate_exchange_rate');
+
 
 Route::get('/home/shit', 'HomeController@shit')->name('shit');

@@ -6,6 +6,8 @@ use App\ExchangeRate;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\RedirectResponse;
 
 class ExchangeRateController extends Controller
 {
@@ -122,5 +124,27 @@ class ExchangeRateController extends Controller
       $exchangeRates = ExchangeRate::all();
 
       return view('exchange_rates', compact('exchangeRates'));
+    }
+
+    public function generateExchangeRate(Request $request){
+
+        $validatorModel = new ExchangeRate;
+        $validator = Validator::make($request->all(),$validatorModel->ruleForCreate);
+        if( $validator->fails() )
+        {
+            $error = true;
+            return redirect('exchange_rates');
+
+            //return view('exchange_rates', compact('error'));
+        }
+        else
+        {
+          $exchangeRate = ExchangeRate::create($request->all());
+            $error = false;
+            return redirect('exchange_rates');
+
+            //return view('exchange_rates', compact('error'));
+        }
+
     }
 }

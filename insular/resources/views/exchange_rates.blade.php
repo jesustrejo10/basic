@@ -19,7 +19,7 @@
 
 
 
-                   <form method="get" action="{{ url('transactions/generate/') }}" enctype="form-data">
+                   <form method="get" action="{{ url('/exchange_rates/generate') }}" >
 
                      <h5 class="card-title">Generar tasa de cambio.</h4>
 
@@ -28,7 +28,7 @@
                        <div class="col-md-6">
                          <div class="form-group">
                            <label class="bmd-label-floating">Valor del bolivar contra el dolar expresado en Bolivares Fuertes </label>
-                           <input type="number" name="message" class="form-control" min="1" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"required>
+                           <input type="number" name="bsf_mount_per_dollar" class="form-control" min="1" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"required>
                          </div>
                        </div>
                        <div class = "col-md-6">
