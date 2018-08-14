@@ -184,28 +184,39 @@ class WalletController extends Controller
                         if($charge['status'] == 'succeeded') {
 
 
-                          $walletTransaction = new WalletTransaction($request->all());
-                          $walletTransaction->status = 1;
-                          $walletTransaction->stripe_id =$charge['id'];
-                          $walletTransaction->total_amount = $amount;
-                          if($walletTransaction->save()){
-                              $response = new BaseResponse();
+                          if($charge['id'] != null){
+                            $walletTransaction = new WalletTransaction($request->all());
+                            $walletTransaction->status = 1;
+                            $walletTransaction->stripe_id =$charge['id'];
+                            $walletTransaction->total_amount = $amount;
+                            if($walletTransaction->save()){
+                                $response = new BaseResponse();
 
-                              $response-> data= $walletTransaction;
-                              $response-> message = "success";
-                              $response ->status = "200";
+                                $response-> data= $walletTransaction;
+                                $response-> message = "success";
+                                $response ->status = "200";
 
-                              return json_encode($response,JSON_UNESCAPED_SLASHES);
+                                return json_encode($response,JSON_UNESCAPED_SLASHES);
 
+                            }else{
+                                $response = new BaseResponse();
+
+                                //$response-> data= "[]";
+                                $response-> message = "Error, please contact the admin";
+                                $response ->status = "500";
+
+                                return json_encode($response,JSON_UNESCAPED_SLASHES);
+                            }
                           }else{
-                              $response = new BaseResponse();
+                            $response = new BaseResponse();
 
-                              //$response-> data= "[]";
-                              $response-> message = "Error, please contact the admin";
-                              $response ->status = "500";
+                            //$response-> data= "[]";
+                            $response-> message = "Error, please contact the admin";
+                            $response ->status = "500";
 
-                              return json_encode($response,JSON_UNESCAPED_SLASHES);
+                            return json_encode($response,JSON_UNESCAPED_SLASHES);
                           }
+
                         } else {
                             //\Session::put('error','Money not add in wallet!!');
                             $response = new BaseResponse();
