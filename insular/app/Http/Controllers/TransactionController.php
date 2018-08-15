@@ -436,7 +436,7 @@ class TransactionController extends Controller
           dd($transaction);
         }
       }else{
-        dd()
+        dd($transaction);
         //return redirect('transactions/'.$transactionId);
       }
 
