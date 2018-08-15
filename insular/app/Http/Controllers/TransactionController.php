@@ -160,7 +160,7 @@ class TransactionController extends Controller
         }
         //Paso 3 Validamos si el balance actual de la persona abarca la cantidad que se desea transferir.
         $balance = WalletTransactionController::getTotalBalance($request->get('wallet_id'));
-        if($balance < $request->get('amount_usd')){
+        if($balance < $request->get('total_amount_usd')){
             $response = new BaseResponse();
 
             //$response-> data= "[]";
@@ -440,7 +440,7 @@ class TransactionController extends Controller
           return redirect('transactions/'.$transactionId);
         }
       }else{
-        
+
         return redirect('transactions/'.$transactionId);
       }
 
