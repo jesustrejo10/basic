@@ -421,7 +421,7 @@ class TransactionController extends Controller
         $statusPerTransaction->is_active = 1;
 
         if($statusPerTransaction->save()){
-          
+
           $refundWalletTransaction = new WalletTransaction();
           $refundWalletTransaction->wallet_id = $walletTransaction->wallet_id;
           $refundWalletTransaction->amount = $walletTransaction->amount *-1;
@@ -432,9 +432,12 @@ class TransactionController extends Controller
           $refundWalletTransaction->save();
 
           return redirect('transactions/'.$transactionId);
+        }else{
+          dd($transaction);
         }
       }else{
-        return redirect('transactions/'.$transactionId);
+        dd()
+        //return redirect('transactions/'.$transactionId);
       }
 
     }
