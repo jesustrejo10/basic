@@ -432,15 +432,16 @@ class TransactionController extends Controller
           if ($refundWalletTransaction->save()){
             return redirect('transactions/'.$transactionId);
           }else{
-            dd($refundWalletTransaction);
-          }
 
+            return redirect('transactions/'.$transactionId);
+          }
         }else{
-          dd($transaction);
+
+          return redirect('transactions/'.$transactionId);
         }
       }else{
-        dd($transaction);
-        //return redirect('transactions/'.$transactionId);
+        
+        return redirect('transactions/'.$transactionId);
       }
 
     }

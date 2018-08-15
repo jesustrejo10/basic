@@ -188,6 +188,8 @@ class UserController extends Controller
 
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
+            dd(Crypt::decryptString($user->password));
+            die();
 
             if(Crypt::decryptString($user->password) == $request->get('password')){
                 $response = new BaseResponse();
