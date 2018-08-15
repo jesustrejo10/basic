@@ -429,9 +429,12 @@ class TransactionController extends Controller
           $refundWalletTransaction->total_amount = $walletTransaction->total_amount *-1;
           $refundWalletTransaction->refund = 1;
           $refundWalletTransaction->wallet_transaction_id_refund = $walletTransaction->id;
-          $refundWalletTransaction->save();
+          if ($refundWalletTransaction->save()){
+            return redirect('transactions/'.$transactionId);
+          }else{
+            dd($refundWalletTransaction);
+          }
 
-          return redirect('transactions/'.$transactionId);
         }else{
           dd($transaction);
         }
