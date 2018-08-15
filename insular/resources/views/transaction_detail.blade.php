@@ -126,52 +126,54 @@
 
                    </div>
 
-                   <h3 class="card-title"><br>Acciones de la transacción.</h3>
-                   <form method="get" action="{{ url('transactions/process/'.$transaction->id) }}" enctype="form-data">
+                   @if($transaction->current_status->transaction_status_id == '1')
 
-                     <h5 class="card-title">Marcar como procesada.</h4>
+                     <h3 class="card-title"><br>Acciones de la transacción.</h3>
+                     <form method="get" action="{{ url('transactions/process/'.$transaction->id) }}" enctype="form-data">
+
+                       <h5 class="card-title">Marcar como procesada.</h4>
+
+                       <div class="row">
+                         <div class="col-md-12">
+                           <h6 class="card-category text-gray">Una transaccion aprobada es aquella que fue efectivamente procesda, es decir fueron transaferidos los Bolivares a la cuenta de destino.</h6>
+                         </div>
+                         <div class="col-md-6">
+                           <div class="form-group">
+                             <label class="bmd-label-floating">Comentario / Nro de referencia </label>
+                             <input type="text" name="message" class="form-control" required>
+                           </div>
+                         </div>
+                         <div class = "col-md-6">
+                           <div class="form-group">
+                             <button type="submit" class="btn btn-primary pull-center" style="width: 100%;">
+                               Marcar transaccion como procesada
+                             </button>
+                            </div>
+                         </div>
+                       </div>
+                   </form>
+                   <form method="get" action="{{ url('transactions/denegate/'.$transaction->id) }}" enctype="form-data">
+
+                     <h5 class="card-title"><br><br>Marcar como denegada.</h4>
 
                      <div class="row">
                        <div class="col-md-12">
-                         <h6 class="card-category text-gray">Una transaccion aprobada es aquella que fue efectivamente procesda, es decir fueron transaferidos los Bolivares a la cuenta de destino.</h6>
+                         <h6 class="card-category text-gray">Una transaccion denegada es aquella que no puede ser procesada, es decir, no fue posible realizar la transferencia de los Bolivares a la cuenta del destino.</h6>
                        </div>
                        <div class="col-md-6">
                          <div class="form-group">
-                           <label class="bmd-label-floating">Comentario / Nro de referencia </label>
-                           <input type="text" name="message" class="form-control" required>
+                           <label class="bmd-label-floating">Motivo / comentario </label>
+                           <input type="text" name="message" class="form-control" value="" required>
                          </div>
                        </div>
                        <div class = "col-md-6">
                          <div class="form-group">
-                           <button type="submit" class="btn btn-primary pull-center" style="width: 100%;">
-                             Marcar transaccion como procesada
-                           </button>
+                           <button type="submit" class="btn btn-danger pull-center" style="width: 100%;">Denegar transacción</button>
                           </div>
                        </div>
                      </div>
-                 </form>
-                 <form method="get" action="{{ url('transactions/denegate/'.$transaction->id) }}" enctype="form-data">
-
-                   <h5 class="card-title"><br><br>Marcar como denegada.</h4>
-
-                   <div class="row">
-                     <div class="col-md-12">
-                       <h6 class="card-category text-gray">Una transaccion denegada es aquella que no puede ser procesada, es decir, no fue posible realizar la transferencia de los Bolivares a la cuenta del destino.</h6>
-                     </div>
-                     <div class="col-md-6">
-                       <div class="form-group">
-                         <label class="bmd-label-floating">Motivo / comentario </label>
-                         <input type="text" name="message" class="form-control" value="" required>
-                       </div>
-                     </div>
-                     <div class = "col-md-6">
-                       <div class="form-group">
-                         <button type="submit" class="btn btn-danger pull-center" style="width: 100%;">Denegar transacción</button>
-                        </div>
-                     </div>
-                   </div>
-                 </form>
-
+                   </form>
+                  @endif
                </div>
              </div>
            </div>

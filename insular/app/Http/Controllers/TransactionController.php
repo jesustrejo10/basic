@@ -383,6 +383,8 @@ class TransactionController extends Controller
 
       $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->get();
       $transaction->history = $transactionStatuses;
+      $transactionCurrentStatus = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
+      $transaction->current_status = $transactionCurrentStatus;
 
 
       return view('transaction_detail',compact('transaction'));
@@ -407,6 +409,8 @@ class TransactionController extends Controller
     }
 
     public function denegateTransaction($transactionId ,Request $request){
+      $transaction = Transaction::find($transactionId);
+      $walletTransaction = WalletTransaction::find($transaction->movement_id);
 
       if( DB::update('update status_per_transactions set is_active = 0 where transaction_id = ?' , [$transactionId])){
 
@@ -417,10 +421,21 @@ class TransactionController extends Controller
         $statusPerTransaction->is_active = 1;
 
         if($statusPerTransaction->save()){
+          
+          $refundWalletTransaction = new WalletTransaction();
+          $refundWalletTransaction->wallet_id = $walletTransaction->wallet_id;
+          $refundWalletTransaction->amount = $walletTransaction->amount *-1;
+          $refundWalletTransaction->fee = $walletTransaction->fee *-1;
+          $refundWalletTransaction->total_amount = $walletTransaction->total_amount *-1;
+          $refundWalletTransaction->refund = 1;
+          $refundWalletTransaction->wallet_transaction_id_refund = $walletTransaction->id;
+          $refundWalletTransaction->save();
+
           return redirect('transactions/'.$transactionId);
         }
       }else{
         return redirect('transactions/'.$transactionId);
       }
+
     }
 }
