@@ -189,7 +189,11 @@ class UserController extends Controller
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
             $testVal = $user->password;
-            if($testVal == $request->get('password')){
+            $salt = $request->get('email') . $password . "INSULARKEYAFTER";
+            $hashed = hash('sha512',$salt);
+
+
+            if($testVal == $hashed){
                 $response = new BaseResponse();
 
                 $response ->status = "200";

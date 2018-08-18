@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
+use App\SaferCrypto;
 
 class User extends Authenticatable
 {
@@ -151,9 +152,17 @@ class User extends Authenticatable
             }
         }
 
+        $message = $request->get('password');
+        $salt = $request->get('email') . $message . "INSULARKEYAFTER";
+        $hashed = hash('sha512',$salt);
 
-        $encrypted = Crypt::encryptString($request->get('password'));
-        $user->password  =$encrypted;
+        //var_dump($encrypted, $decrypted);
+        //die();
+        //$encrypted = Crypt::encryptString($request->get('password'));
+
+
+
+        $user->password  =$hashed;
         //Caso 5, si estamos ok y el usuario es guardado en bd. retorno el Json con la respuesta exitosa.
         if($user->save()){
             $response = new BaseResponse();
@@ -439,9 +448,8 @@ class User extends Authenticatable
         }
 
         $updateType = $request->get('update_type');
-        $persistentUser = User::where('id',$userId )
-            ->take(1)
-            ->get();
+        $persistentUser = User::find($userId);
+
 
         if (!$persistentUser->first()) {
 
@@ -465,8 +473,14 @@ class User extends Authenticatable
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
 
+          $testVal = $persistentUser->password;
 
-            if(Crypt::decryptString($userForPassword->password) == $request->get('password')){
+
+          $password =$request->get('password');
+          $salt = $persistentUser->email . $password . "INSULARKEYAFTER";
+          $hashed = hash('sha512',$salt);
+
+            if( $hashed == $testVal){
                 $response = new BaseResponse();
 
                 $response ->status = "200";
