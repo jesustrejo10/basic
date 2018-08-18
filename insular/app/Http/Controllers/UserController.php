@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
+use App\Country;
 
 class UserController extends Controller
 {
@@ -68,6 +69,9 @@ class UserController extends Controller
 
     public function seeUserDetail($userId){
       $user = User::find($userId);
+      $country = Country::find($user->country_id);
+      $user->country = $country;
+
       if($user == null){
         return redirect('home');
       }else {

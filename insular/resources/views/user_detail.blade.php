@@ -39,7 +39,7 @@
                      <div class="col-md-6">
                        <div class="form-group">
                          <label class="bmd-label-floating">Nacionalidad</label>
-                         <input type="text" class="form-control" value="{{$user->country_id}}" disabled>
+                         <input type="text" class="form-control" value="{{$user->country->name}}" disabled>
                        </div>
                      </div>
                    </div>
