@@ -35,6 +35,7 @@
     <link href="{{ asset('css/material-dashboard.css?v=2.1.0') }}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
 
     <title>
       Insular
@@ -47,49 +48,100 @@
   @guest
   @else
     <div class="sidebar" data-color="orange" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
-      <!--
-        Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-
-        Tip 2: you can also add an image using data-image tag
-      -->
       <div class="logo">
         <a class="simple-text logo-normal">
           Insular
         </a>
       </div>
-      <div class="sidebar-wrapper">
+      <div class="sidebar-wrapper sidebar_background div-wrapper" >
         <ul class="nav">
-          <li class="nav-item active  ">
-            <a class="nav-link" href="{{ url('home') }}">
-              <i class="material-icons">dashboard</i>
-              <p>Inicio</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('users') }}">
-              <i class="material-icons">person</i>
-              <p>Usuarios</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('transactions') }}">
-              <i class="material-icons">content_paste</i>
-              <p>Transacciones</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{url('wallet_transaction/getAll')}}">
-              <i class="material-icons">library_books</i>
-              <p>Movimientos de cuenta</p>
-            </a>
-          </li>
-          <li class="nav-item ">
-            <a class="nav-link" href="{{ url('exchange_rates') }}">
-              <i class="material-icons">bubble_chart</i>
-              <p>Tasas de cambio</p>
-            </a>
-          </li>
+          @if(  app('request')->input('v') == '1' )
+
+            <li class="nav-item active  ">
+              <a class="nav-link" href="{{ url('home/?v=1') }}">
+                <i class="material-icons">dashboard</i>
+                <p> Inicio</p>
+              </a>
+            </li>
+
+          @else
+
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('home/?v=1') }}">
+                <i class="material-icons " style="color:white;">dashboard</i>
+                <p class="sidebar_text_unselected"> Inicio</p>
+              </a>
+            </li>
+
+          @endif
+
+
+          @if(  app('request')->input('v') == '2' )
+            <li class="nav-item  active">
+              <a class="nav-link" href="{{ url('users/?v=2') }}">
+                <i class="material-icons" style="color:white;">person</i>
+                <p class="sidebar_text_unselected">Usuarios</p>
+              </a>
+            </li>
+          @else
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('users/?v=2') }}">
+                <i class="material-icons" style="color:white;">person</i>
+                <p class="sidebar_text_unselected">Usuarios</p>
+              </a>
+            </li>
+          @endif
+
+          @if(  app('request')->input('v') == '3' )
+            <li class="nav-item active ">
+              <a class="nav-link " href="{{ url('transactions/?v=3') }}">
+                <i class="material-icons"  style="color:white;">content_paste</i>
+                <p class="sidebar_text_unselected">Transacciones</p>
+              </a>
+            </li>
+          @else
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('transactions/?v=3') }}">
+                <i class="material-icons"  style="color:white;">content_paste</i>
+                <p class="sidebar_text_unselected">Transacciones</p>
+              </a>
+            </li>
+          @endif
+
+          @if(  app('request')->input('v') == '4' )
+            <li class="nav-item active">
+              <a class="nav-link" href="{{url('wallet_transaction/getAll/?v=4')}}">
+                <i class="material-icons"  style="color:white;">library_books</i>
+                <p class="sidebar_text_unselected"> Movimientos de cuenta</p>
+              </a>
+            </li>
+          @else
+            <li class="nav-item">
+              <a class="nav-link" href="{{url('wallet_transaction/getAll/?v=4')}}">
+                <i class="material-icons"  style="color:white;">library_books</i>
+                <p class="sidebar_text_unselected"> Movimientos de cuenta</p>
+              </a>
+            </li>
+          @endif
+
+          @if(  app('request')->input('v') == '5' )
+            <li class="nav-item active">
+              <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}">
+                <i class="material-icons"  style="color:white;">bubble_chart</i>
+                <p class="sidebar_text_unselected">Tasas de cambio</p>
+              </a>
+            </li>
+          @else
+            <li class="nav-item ">
+              <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}">
+                <i class="material-icons"  style="color:white;">bubble_chart</i>
+                <p class="sidebar_text_unselected">Tasas de cambio</p>
+              </a>
+            </li>
+          @endif
+
         </ul>
+        <img src="{{url('img/logo_white.png')}}"/>
       </div>
     </div>
   @endguest
@@ -97,9 +149,7 @@
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">
-                {{ config('app.name', 'Laravel') }}
-            </a>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

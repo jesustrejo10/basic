@@ -56,7 +56,7 @@
                   {{  $item->created_at }}
                 </td>
                 <td>
-                  <a href="./transactions/{{$item->id}}"> ver detalle </a>
+                  <a href="{{url('transactions/'.$item->id.'?v=3')}}"> ver detalle </a>
                 </td>
             </tr>
             @endforeach

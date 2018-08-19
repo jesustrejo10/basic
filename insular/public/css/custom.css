@@ -1,0 +1,29 @@
+.sidebar_background{
+  background: #64a3d6; /* Old browsers */
+  background: -moz-linear-gradient(top, #64a3d6 0%, #64a3d6 0%, #1c5196 60%, #0d1954 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #64a3d6 0%,#64a3d6 0%,#1c5196 60%,#0d1954 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, #64a3d6 0%,#64a3d6 0%,#1c5196 60%,#0d1954 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#64a3d6', endColorstr='#0d1954',GradientType=0 ); /* IE6-9 */
+}
+
+.sidebar_text_unselected{
+  color:#ffffff;
+}
+
+.div-wrapper {
+    position: relative;
+    height: 300px;
+    width: 300px;
+}
+
+.div-wrapper img {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 90%;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 40px;
+
+}

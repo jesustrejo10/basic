@@ -196,7 +196,7 @@
 
                  <div class="row">
                    <div class="col-md-12">
-                     <a href="{{ url('/users/'.$transaction->transactionOwner->id) }}" class="btn btn-primary pull-center">Ver Emisor</a>
+                     <a href="{{ url('/users/'.$transaction->transactionOwner->id).'?v=2' }}" class="btn btn-primary pull-center">Ver Emisor</a>
                    </div>
                  </div>
                </div>

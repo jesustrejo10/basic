@@ -46,7 +46,7 @@
                   @endif
                 </td>
                 <td>
-                    <a href="{{ url('users/'.$item->id) }}"> ver detalle </a>
+                    <a href="{{ url('users/'.$item->id.'?v=2') }}"> ver detalle </a>
                 </td>
             </tr>
             @endforeach

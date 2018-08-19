@@ -24,7 +24,7 @@
             @foreach ($movements as $item)
             <tr>
                 <td style="text-align:center;">
-                  <a href="{{ url('users/'.$item->user->id) }}">
+                  <a href="{{ url('users/'.$item->user->id.'?v=2') }}">
                     {{ $item->user->email }}
                   </a>
                 </td>
@@ -49,7 +49,7 @@
                     @if($item->stripe_id != "")
                       <a  target="_blank" href="{{ 'https://dashboard.stripe.com/test/payments/'.$item->stripe_id }}" > Ver detalle </a>
                     @else
-                      <a href="{{ url('/transactions/'.$item->transaction->id) }}">
+                      <a href="{{ url('/transactions/'.$item->transaction->id.'?v=3') }}">
                         Ver detalle
                       </a>
                     @endif
