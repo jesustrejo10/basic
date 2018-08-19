@@ -16,15 +16,9 @@
                    <p class="card-category">En esta seccion es posible crear una nueva tasa de cambio. La nueva tasa sustituira a las existentes.</p>
                  </div>
                  <div class="card-body">
-
-
-
                    <form method="get" action="{{ url('/exchange_rates/generate') }}" >
-
                      <h5 class="card-title">Generar tasa de cambio.</h4>
-
                      <div class="row">
-
                        <div class="col-md-6">
                          <div class="form-group">
                            <label class="bmd-label-floating">Valor del bolivar contra el dolar expresado en Bolivares Fuertes </label>
@@ -85,7 +79,10 @@
   $(document).ready(function() {
     // Javascript method's body can be found in assets/js/demos.js
     var myTable =
-    $('#pageTable').DataTable();
+    $('#pageTable').DataTable({
+        "orderFixed": [ 0, 'desc' ]
+      }
+    );
   });
 </script>
 

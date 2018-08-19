@@ -121,8 +121,7 @@ class ExchangeRateController extends Controller
     }
 
     public function showAllExchangeRates(){
-      $exchangeRates = ExchangeRate::all();
-
+      $exchangeRates = ExchangeRate::select()->orderBy('id', 'desc')->get();
       return view('exchange_rates', compact('exchangeRates'));
     }
 
@@ -133,7 +132,7 @@ class ExchangeRateController extends Controller
         if( $validator->fails() )
         {
             $error = true;
-            return redirect('exchange_rates');
+            return redirect('exchange_rates?v=5');
 
             //return view('exchange_rates', compact('error'));
         }
@@ -141,7 +140,7 @@ class ExchangeRateController extends Controller
         {
           $exchangeRate = ExchangeRate::create($request->all());
             $error = false;
-            return redirect('exchange_rates');
+            return redirect('exchange_rates?v=5');
 
             //return view('exchange_rates', compact('error'));
         }

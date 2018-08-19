@@ -70,7 +70,9 @@
   $(document).ready(function() {
     // Javascript method's body can be found in assets/js/demos.js
     var myTable =
-    $('#pageTable').DataTable();
+    $('#pageTable').DataTable({
+        "orderFixed": [ 5, 'desc' ]
+      });
   });
 </script>
 

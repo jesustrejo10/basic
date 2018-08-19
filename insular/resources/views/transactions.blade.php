@@ -5,8 +5,13 @@
 @section('content')
 
   <div class="row justify-content-center">
-    <div class="container-fluid">
-      <table id="pageTable" class="display">
+    <div class="container-fluid card" style="margin-top:-45; margin-left: 20; margin-right: 20; margin-bottom: 20;">
+      <div class="card-header card-header-primary "style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
+        <h3 class="card-title">Gestión de transacciones del sistema.</h3>
+        <p class="card-category">En esta seccion es posible ver cada uno de las transacciones dell sistema. <br> Además con la opción ver detalle, puede conocer más información de la misma.</p>
+      </div>
+      <div class="margin_card">
+        <table id="pageTable" class="display">
         <thead>
             <tr>
                 <th>Id</th>
@@ -62,6 +67,7 @@
             @endforeach
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script>
@@ -73,7 +79,9 @@
   $(document).ready(function() {
     // Javascript method's body can be found in assets/js/demos.js
     var myTable =
-    $('#pageTable').DataTable();
+    $('#pageTable').DataTable({
+        "orderFixed": [ 0, 'desc' ]
+      });
   });
 </script>
 
