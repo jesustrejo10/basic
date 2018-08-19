@@ -386,7 +386,13 @@ class TransactionController extends Controller
       $transactionCurrentStatus = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
       $transaction->current_status = $transactionCurrentStatus;
 
+      $venezuelanBank = VenezuelanBank::find($transaction->natural_person->bank_id);
+      $transaction->venezuelan_bank = $venezuelanBank;
 
+      $walletTransaction = WalletTransaction::find($transaction->movement_id);
+      $transaction->wallet_transaction = $walletTransaction;
+
+      //dd($transaction);
       return view('transaction_detail',compact('transaction'));
     }
 
@@ -443,6 +449,39 @@ class TransactionController extends Controller
 
         return redirect('transactions/'.$transactionId);
       }
+
+    }
+
+    public function seeTransactionsByUser($userId){
+      //$transactions = Transaction::all()->sortByDesc("id");
+      $transactions = Transaction::select()
+                           ->where('user_id', '=', $userId)
+                           ->get();
+
+
+      foreach ($transactions as $transaction){
+        $transactionOwnerId = $transaction->user_id;
+        $transactionOwner = User::find($transactionOwnerId);
+        $transactionOwnerName = $transactionOwner->first_name . " ". $transactionOwner->last_name;
+        $transaction->transaction_owner_name = $transactionOwnerName;
+
+        $exchangeRateId = $transaction->exchange_rate_id;
+        $exchangeRate = ExchangeRate::find($exchangeRateId);
+        $exchangeRateValue = $exchangeRate->bsf_mount_per_dollar;
+
+        $transaction->exchange_rate_value =$exchangeRateValue;
+        $transactionBsfAmount = $exchangeRateValue * $transaction->amount_usd;
+        $transaction->total_bsf_amount = $transactionBsfAmount;
+
+        $transactionNaturalPersonId = $transaction->natural_person_id;
+        $transactionNaturalPerson = NaturalPerson::find($transactionNaturalPersonId);
+        $transaction -> natural_person = $transactionNaturalPerson;
+
+        $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
+        $transaction->history = $transactionStatuses;
+      }
+      
+      return view('transactions', compact('transactions'));
 
     }
 }

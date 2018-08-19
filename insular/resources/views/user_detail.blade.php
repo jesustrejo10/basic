@@ -121,10 +121,14 @@
                  <h4 class="card-title">Acciones adicionales.</h4>
                  <div class="row">
                    <div class="col-md-12">
-                     <button type="submit" class="btn btn-primary pull-center">Ver Depositos</button>
+                     <a href="{{ url('/wallet_transaction/getByUser/'.$user->wallet_id) }}" class="btn btn-primary pull-center">
+                       Ver Movimientos
+                     </a>
                    </div>
                    <div class="col-md-12">
-                     <button type="submit" class="btn btn-primary pull-center">Ver Transacciones</button>
+                     <a href="{{ url('transactions/user/'.$user->id) }}" class="btn btn-primary pull-center">
+                       Ver Transacciones
+                     </a>
                    </div>
                  </div>
                </div>

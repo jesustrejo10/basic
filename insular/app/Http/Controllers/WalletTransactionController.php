@@ -6,6 +6,8 @@ use App\WalletTransaction;
 use Illuminate\Http\Request;
 use Symfony\Component\Console\Helper\Table;
 use App\BaseResponse;
+use App\User;
+use App\Transaction;
 
 class WalletTransactionController extends Controller
 {
@@ -108,7 +110,7 @@ class WalletTransactionController extends Controller
         }
 
         $movements = WalletTransaction::select('total_amount')->where('wallet_id', $walletId)->get();
-        
+
         $amount = 0;
         foreach($movements as $movement) {
             $amount = $amount + ($movement->total_amount);
@@ -122,6 +124,60 @@ class WalletTransactionController extends Controller
 
         return json_encode($response,JSON_UNESCAPED_SLASHES);
 
+    }
+
+    public static function showAllMovements(){
+      $movements = WalletTransaction::all();
+
+      foreach($movements as $movement) {
+          $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
+          $movement->user = $user;
+
+          if($movement->total_amount > 0){
+              if($movement->stripe_id != ""){
+                  $movement->movement_type = "Deposito";
+              }else{
+                  $transaction = Transaction::select()->where('movement_id',$movement->wallet_transaction_id_refund)->first();
+                  $movement->transaction = $transaction;
+                  $movement->movement_type = "Reintegro";
+              }
+          }else{
+              $transaction = Transaction::select()->where('movement_id',$movement->id)->first();
+              $movement->transaction = $transaction;
+              $movement->movement_type = "transferencia";
+          }
+      }
+
+      //dd($movements);
+      return view('wallet_transaction_list', compact('movements'));
+
+    }
+
+    public static function showMovementsPerUser($walletId){
+        $movements = WalletTransaction::select()->where('wallet_id',$walletId)->get();
+        //$movements = WalletTransaction::select()->where();
+
+        foreach($movements as $movement) {
+            $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
+            $movement->user = $user;
+
+            if($movement->total_amount > 0){
+                if($movement->stripe_id != ""){
+                    $movement->movement_type = "Deposito";
+                }else{
+                    $transaction = Transaction::select()->where('movement_id',$movement->wallet_transaction_id_refund)->first();
+                    $movement->transaction = $transaction;
+                    $movement->movement_type = "Reintegro";
+                }
+            }else{
+                $transaction = Transaction::select()->where('movement_id',$movement->id)->first();
+                $movement->transaction = $transaction;
+                $movement->movement_type = "transferencia";
+            }
+        }
+
+        //dd($movements);
+        return view('wallet_transaction_list', compact('movements'));
     }
 
 }

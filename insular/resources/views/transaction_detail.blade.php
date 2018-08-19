@@ -25,7 +25,7 @@
                      <div class="col-md-6">
                        <div class="form-group">
                          <label class="bmd-label-floating">Cédula del titular</label>
-                         <input type="text" class="form-control" value="{{$transaction->natural_person->cedula}}" disabled>
+                         <input type="text" class="form-control" value="{{$transaction->natural_person->person_type .' '. $transaction->natural_person->cedula}}" disabled>
                        </div>
                      </div>
                    </div>
@@ -39,7 +39,7 @@
                      <div class="col-md-6">
                        <div class="form-group">
                          <label class="bmd-label-floating">Banco</label>
-                         <input type="text" class="form-control" value="{{$transaction->natural_person->bank_id}}" disabled>
+                         <input type="text" class="form-control" value="{{$transaction->venezuelan_bank->name}}" disabled>
                        </div>
                      </div>
                    </div>
@@ -50,26 +50,30 @@
                          <input type="email" class="form-control" value="{{$transaction->natural_person->account_number}}" disabled>
                        </div>
                      </div>
-                     <div class="col-md-6">
-                       <div class="form-group">
-                         <label class="bmd-label-floating">Tipo de Cuenta</label>
-                         <input type="text" class="form-control" value="Corriente" disabled>
-                       </div>
-                     </div>
+
                    </div>
                    <div class="row">
                      <div class="col-md-6">
                        <div class="form-group">
-                         <label class="bmd-label-floating">Monto en Usd</label>
+                         <label class="bmd-label-floating">Monto base en Usd</label>
                          <input type="email" class="form-control" value="Usd {{$transaction->amount_usd}}" disabled>
                        </div>
                      </div>
                      <div class="col-md-6">
                        <div class="form-group">
                          <label class="bmd-label-floating">Monto por comisión</label>
-                         <input type="text" class="form-control" value="PENDIENTE" disabled>
+                         <input type="text" class="form-control" value="Usd {{$transaction->wallet_transaction->fee *-1}}" disabled>
                        </div>
                      </div>
+                   </div>
+                   <div class="row">
+                     <div class="col-md-6">
+                       <div class="form-group">
+                         <label class="bmd-label-floating">Monto total en Usd</label>
+                         <input type="email" class="form-control" value="Usd {{$transaction->wallet_transaction->total_amount *-1}}" disabled>
+                       </div>
+                     </div>
+
                    </div>
                    <div class="row">
                      <div class="col-md-6">

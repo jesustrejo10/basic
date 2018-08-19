@@ -78,9 +78,9 @@
             </a>
           </li>
           <li class="nav-item ">
-            <a class="nav-link" href="./typography.html">
+            <a class="nav-link" href="{{url('wallet_transaction/getAll')}}">
               <i class="material-icons">library_books</i>
-              <p>Depositos</p>
+              <p>Movimientos de cuenta</p>
             </a>
           </li>
           <li class="nav-item ">
