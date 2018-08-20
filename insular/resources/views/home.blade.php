@@ -77,14 +77,14 @@
                 <div class="ct-chart" id="dailySalesChart"></div>
               </div>
               <div class="card-body">
-                <h4 class="card-title">Daily Salesasdasdasda</h4>
+                <h4 class="card-title">Últimas transacciones</h4>
                 <p class="card-category">
-                  <span class="text-success"><i class="fa fa-long-arrow-up"></i> 55% </span> increase in today sales.</p>
+                  Se pueden observar las últimas transacciones realizadas en el sistema.</p>
               </div>
 
               <div class="card-footer">
                 <div class="stats">
-                  <i class="material-icons">access_time</i> updated 4 minutes ago
+                  <i class="material-icons">access_time</i> <span class="text-success">Actualizado</span>
                 </div>
               </div>
             </div>
@@ -135,7 +135,6 @@
 <script src="{{ asset('js/core/popper.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/core/bootstrap-material-design.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/plugins/perfect-scrollbar.jquery.min.js') }}"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 <script src="{{ asset('js/plugins/chartist.min.js') }}"></script>
 <script src="{{ asset('js/plugins/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('js/material-dashboard.js?v=2.1.0') }}" type="text/javascript"></script>

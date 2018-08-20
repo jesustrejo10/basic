@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\User;
 use App\StatusPerTransaction;
 use Illuminate\Support\Facades\DB;
+use App\Transaction;
+use App\WalletTransaction;
+
 
 class HomeController extends Controller
 {
@@ -38,8 +41,37 @@ class HomeController extends Controller
       $baseMount = $lastExchangerate->bsf_mount_per_dollar;
       $finalMount = number_format($baseMount);
 
-      $a = [1,2,3,4,5,6];
-      $b = [10,20,30,40,50,60];
+      $transactionMovements = WalletTransaction::select()->where('total_amount','>','0')->where('wallet_transaction_id_refund','>','0')->take(10)->orderBy('id','desc')->get();
+
+      foreach($transactionMovements as $movement) {
+          $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
+          $movement->user = $user;
+
+          if($movement->total_amount > 0){
+              if($movement->stripe_id != ""){
+                  $movement->movement_type = "Deposito";
+              }else{
+                  $transaction = Transaction::select()->where('movement_id',$movement->wallet_transaction_id_refund)->first();
+                  $movement->transaction = $transaction;
+                  $movement->movement_type = "Reintegro";
+              }
+          }else{
+              $transaction = Transaction::select()->where('movement_id',$movement->id)->first();
+              $movement->transaction = $transaction;
+              $movement->movement_type = "transferencia";
+
+          }
+      }
+
+      //dd($transactionMovements);
+      $a=[];
+      $b=[];
+      foreach ($transactionMovements as $movement) {
+        array_push($a,"T");
+        array_push($b,$movement->total_amount);
+        // code...
+      }
+
 
       return view('home',compact('a','b','usersPendingToValidate','pendingTransactionsAmount','finalMount'));
 
