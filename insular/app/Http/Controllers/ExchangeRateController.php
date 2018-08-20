@@ -121,8 +121,15 @@ class ExchangeRateController extends Controller
     }
 
     public function showAllExchangeRates(){
+      $lastExchangerate =  DB::table('exchange_rates')->orderBy('id', 'desc')->first();
+
+      $baseMount = $lastExchangerate->bsf_mount_per_dollar;
+      $finalMount = number_format($baseMount);
+
+      $lastExchangerate->mount_per_dollar = $finalMount;
       $exchangeRates = ExchangeRate::select()->orderBy('id', 'desc')->get();
-      return view('exchange_rates', compact('exchangeRates'));
+
+      return view('exchange_rates', compact('exchangeRates','lastExchangerate'));
     }
 
     public function generateExchangeRate(Request $request){

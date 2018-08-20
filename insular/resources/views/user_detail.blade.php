@@ -9,7 +9,7 @@
          <div class="row">
            <div class="col-md-8">
              <div class="card">
-               <div class="card-header card-header-primary">
+               <div class="card-header card-header-primary" style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
                  <h4 class="card-title">Ver detalle de Usuario</h4>
                  <p class="card-category">En esta seccion podra ver la informacion de un usuario en especifico y validarlo si corresponde.</p>
                </div>
@@ -121,12 +121,12 @@
                  <h4 class="card-title">Acciones adicionales.</h4>
                  <div class="row">
                    <div class="col-md-12">
-                     <a href="{{ url('/wallet_transaction/getByUser/'.$user->wallet_id.'?v=4') }}" class="btn btn-primary pull-center">
+                     <a href="{{ url('/wallet_transaction/getByUser/'.$user->wallet_id.'?v=4') }}" class="btn btn-primary pull-center" style="background:#191970;">
                        Ver Movimientos
                      </a>
                    </div>
                    <div class="col-md-12">
-                     <a href="{{ url('transactions/user/'.$user->id.'?v=3') }}" class="btn btn-primary pull-center">
+                     <a href="{{ url('transactions/user/'.$user->id.'?v=3') }}" class="btn btn-primary pull-center" style="background:#191970;">
                        Ver Transacciones
                      </a>
                    </div>

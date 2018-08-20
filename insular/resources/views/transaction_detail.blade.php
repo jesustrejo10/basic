@@ -9,12 +9,14 @@
          <div class="row">
            <div class="col-md-8">
              <div class="card">
-               <div class="card-header card-header-primary">
-                 <h4 class="card-title">Ver detalle de Transacción</h4>
+               <div class="card-header card-header-primary"  style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
+                 <h4 class="card-title">Detalle de Transacción</h4>
                  <p class="card-category">En esta seccion podra ver la informacion de una transacción para procesarla.</p>
                </div>
-               <div class="card-body">
+               <div class="card-body" style="padding: 40;">
                  <h3 class="card-title">Información de la transacción.</h3>
+                 <h4 class="card-title">Información del beneficiario.</h4>
+
                    <div class="row">
                      <div class="col-md-6">
                        <div class="form-group">
@@ -52,6 +54,8 @@
                      </div>
 
                    </div>
+                   <br><br>
+                   <h4 class="card-title">Información de la transacción.</h4>
                    <div class="row">
                      <div class="col-md-6">
                        <div class="form-group">
@@ -90,8 +94,10 @@
                      </div>
                    </div>
 
+                  <br><br>
                    <div class="card-body">
-                     <h3 class="card-title">Historico de Transaccion.</h3>
+                     <h3 class="card-title">Histórico de Transacción.</h3>
+                     <br>
 
                      <table class="display" style="width:100%;">
                        <thead>
@@ -143,14 +149,14 @@
                          </div>
                          <div class="col-md-6">
                            <div class="form-group">
-                             <label class="bmd-label-floating">Comentario / Nro de referencia </label>
+                             <label class="bmd-label-floating">Comentario / Nro de referencia (requerido) </label>
                              <input type="text" name="message" class="form-control" required>
                            </div>
                          </div>
                          <div class = "col-md-6">
                            <div class="form-group">
                              <button type="submit" class="btn btn-primary pull-center" style="width: 100%;">
-                               Marcar transaccion como procesada
+                               Marcar transacción como procesada
                              </button>
                             </div>
                          </div>
@@ -166,7 +172,7 @@
                        </div>
                        <div class="col-md-6">
                          <div class="form-group">
-                           <label class="bmd-label-floating">Motivo / comentario </label>
+                           <label class="bmd-label-floating">Motivo / comentario (requerido)</label>
                            <input type="text" name="message" class="form-control" value="" required>
                          </div>
                        </div>
@@ -196,7 +202,7 @@
 
                  <div class="row">
                    <div class="col-md-12">
-                     <a href="{{ url('/users/'.$transaction->transactionOwner->id).'?v=2' }}" class="btn btn-primary pull-center">Ver Emisor</a>
+                     <a href="{{ url('/users/'.$transaction->transactionOwner->id).'?v=2' }}" class="btn btn-primary pull-center" style="background:#191970;">Ver Información del Emisor</a>
                    </div>
                  </div>
                </div>
