@@ -41,7 +41,7 @@ class HomeController extends Controller
       $baseMount = $lastExchangerate->bsf_mount_per_dollar;
       $finalMount = number_format($baseMount);
 
-      $transactionMovements = WalletTransaction::select()->where('total_amount','>','0')->where('wallet_transaction_id_refund','>','0')->take(10)->orderBy('id','desc')->get();
+      $transactionMovements = WalletTransaction::select()->where('total_amount','<','0')->take(10)->orderBy('id','desc')->get();
 
       foreach($transactionMovements as $movement) {
           $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
@@ -68,9 +68,11 @@ class HomeController extends Controller
       $b=[];
       foreach ($transactionMovements as $movement) {
         array_push($a,"T");
-        array_push($b,$movement->total_amount);
+        array_push($b,$movement->total_amount*-1);
         // code...
       }
+
+      //dd($transactionMovements);
 
 
       return view('home',compact('a','b','usersPendingToValidate','pendingTransactionsAmount','finalMount'));
