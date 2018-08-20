@@ -9,7 +9,7 @@
     <div class="container-fluid card" style="margin-top:-45;">
       <div class="card-header card-header-primary "style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
         <h3 class="card-title">Gestión de usuarios del sistema.</h3>
-        <p class="card-category">En esta seccion es posible ver cada uno de los usuarios del sistema. <br> Además con la opción ver detalle, puede conocer más información del mismo.</p>
+        <p class="card-category">En esta sección es posible ver cada uno de los usuarios del sistema. <br> Además con la opción ver detalle, puede conocer más información del mismo.</p>
       </div>
       <div class="margin_card">
         <table id="pageTable" class="display ">

@@ -12,7 +12,7 @@
     <div class="container-fluid card" style="margin-top:-45;">
       <div class="card-header card-header-primary "style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
         <h3 class="card-title">Gestión de tasas de cambio.</h3>
-        <p class="card-category">En esta seccion es agregar una nueva tasa de cambio y ver el historico de las mismas.</p>
+        <p class="card-category">En esta sección es agregar una nueva tasa de cambio y ver el historico de las mismas.</p>
       </div>
 
       <div>

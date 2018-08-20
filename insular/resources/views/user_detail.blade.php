@@ -11,7 +11,7 @@
              <div class="card">
                <div class="card-header card-header-primary" style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
                  <h4 class="card-title">Ver detalle de Usuario</h4>
-                 <p class="card-category">En esta seccion podra ver la informacion de un usuario en especifico y validarlo si corresponde.</p>
+                 <p class="card-category">En esta sección podra ver la informacion de un usuario en especifico y validarlo si corresponde.</p>
                </div>
                <div class="card-body">
                  <form>
@@ -51,7 +51,7 @@
                        <div class="form-group">
                          <label>Validación de usuario</label>
                          <div class="form-group">
-                           <label class="bmd-label-floating"> En esta seccion el administrador debera cotejar la información del pasaporte con la informacion del usuario.</label>
+                           <label class="bmd-label-floating"> En esta sección el administrador deberá cotejar la información del pasaporte con la información del usuario.</label>
                          </div>
                        </div>
                      </div>
@@ -66,7 +66,7 @@
                         @if($user ->verified == '2' && $user->in_verified_process == '0')
                           <div class="alert alert-danger col-md-10 pull-center">
                            <span>
-                             <b> Verificación denegada. - </b> Este usuario debera volver a solicitar la verificación de su identidad.</span>
+                             <b> Verificación denegada. - </b> Este usuario deberá volver a solicitar la verificación de su identidad.</span>
                          </div>
                         @else
                           <div class="alert alert-warning col-md-10 pull-center">
@@ -94,7 +94,7 @@
                     @if ($user -> verified == '0' || $user->in_verified_process == '1')
                     <div class="row">
                       <div class="col-md-6">
-                        <a href="{{ url('users/validate/'.$user->id.'?new_status=2') }}" class="btn btn-danger pull-right">Denegar Validacion de Usuario</a>
+                        <a href="{{ url('users/validate/'.$user->id.'?new_status=2') }}" class="btn btn-danger pull-right">Denegar Validación de Usuario</a>
                         <div class="clearfix"></div>
                       </div>
                       <div class="col-md-6">

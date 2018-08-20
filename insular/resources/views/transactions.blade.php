@@ -8,7 +8,7 @@
     <div class="container-fluid card" style="margin-top:-45; margin-left: 20; margin-right: 20; margin-bottom: 20;">
       <div class="card-header card-header-primary "style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
         <h3 class="card-title">Gestión de transacciones del sistema.</h3>
-        <p class="card-category">En esta seccion es posible ver cada uno de las transacciones dell sistema. <br> Además con la opción ver detalle, puede conocer más información de la misma.</p>
+        <p class="card-category">En esta sección es posible ver cada uno de las transacciones del sistema. <br> Además con la opción ver detalle, puede conocer más información de la misma.</p>
       </div>
       <div class="margin_card">
         <table id="pageTable" class="display">
