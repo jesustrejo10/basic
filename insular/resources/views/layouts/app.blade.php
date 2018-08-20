@@ -57,8 +57,8 @@
         <ul class="nav">
           @if(  app('request')->input('v') == '1' )
 
-            <li class="nav-item active  ">
-              <a class="nav-link" href="{{ url('home/?v=1') }}">
+            <li class="nav-item active  " >
+              <a class="nav-link" href="{{ url('home/?v=1') }}" style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
                 <i class="material-icons">dashboard</i>
                 <p> Inicio</p>
               </a>
@@ -67,7 +67,7 @@
           @else
 
             <li class="nav-item ">
-              <a class="nav-link" href="{{ url('home/?v=1') }}">
+              <a class="nav-link" href="{{ url('home/?v=1') }}"  >
                 <i class="material-icons " style="color:white;">dashboard</i>
                 <p class="sidebar_text_unselected"> Inicio</p>
               </a>
@@ -78,7 +78,7 @@
 
           @if(  app('request')->input('v') == '2' )
             <li class="nav-item  active">
-              <a class="nav-link" href="{{ url('users/?v=2') }}">
+              <a class="nav-link" href="{{ url('users/?v=2') }}"  style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
                 <i class="material-icons" style="color:white;">person</i>
                 <p class="sidebar_text_unselected">Usuarios</p>
               </a>
@@ -94,7 +94,7 @@
 
           @if(  app('request')->input('v') == '3' )
             <li class="nav-item active ">
-              <a class="nav-link " href="{{ url('transactions/?v=3') }}">
+              <a class="nav-link " href="{{ url('transactions/?v=3') }}"  style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
                 <i class="material-icons"  style="color:white;">content_paste</i>
                 <p class="sidebar_text_unselected">Transacciones</p>
               </a>
@@ -110,7 +110,7 @@
 
           @if(  app('request')->input('v') == '4' )
             <li class="nav-item active">
-              <a class="nav-link" href="{{url('wallet_transaction/getAll/?v=4')}}">
+              <a class="nav-link" href="{{url('wallet_transaction/getAll/?v=4')}}"  style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
                 <i class="material-icons"  style="color:white;">library_books</i>
                 <p class="sidebar_text_unselected"> Movimientos de cuenta</p>
               </a>
@@ -126,7 +126,7 @@
 
           @if(  app('request')->input('v') == '5' )
             <li class="nav-item active">
-              <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}">
+              <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}"  style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
                 <i class="material-icons"  style="color:white;">bubble_chart</i>
                 <p class="sidebar_text_unselected">Tasas de cambio</p>
               </a>
