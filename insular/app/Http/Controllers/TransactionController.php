@@ -164,7 +164,7 @@ class TransactionController extends Controller
             $response = new BaseResponse();
 
             //$response-> data= "[]";
-            $response-> message = "The actual user balance is less than the requested transaction amount";
+            $response-> message = "El monto a transferir supera su balance.";
             $response ->status = "500";
 
             return json_encode($response,JSON_UNESCAPED_SLASHES);
@@ -480,7 +480,7 @@ class TransactionController extends Controller
         $transactionStatuses = StatusPerTransaction::where('transaction_id', '=', $transaction->id)->where('is_active','=','1')->first();
         $transaction->history = $transactionStatuses;
       }
-      
+
       return view('transactions', compact('transactions'));
 
     }
