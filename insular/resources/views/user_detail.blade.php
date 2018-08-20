@@ -10,7 +10,7 @@
            <div class="col-md-8">
              <div class="card">
                <div class="card-header card-header-primary" style="background: linear-gradient(180deg, #64a3d6, #1c5196);">
-                 <h4 class="card-title">Ver detalle de Usuario</h4>
+                 <h3 class="card-title">Ver detalle de Usuario</h3>
                  <p class="card-category">En esta sección podra ver la informacion de un usuario en especifico y validarlo si corresponde.</p>
                </div>
                <div class="card-body">

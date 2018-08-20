@@ -1,9 +1,15 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="content" style="margin-top: -45px; margin-left:40px; margin-right:40px;">
     <div class="row justify-content-center">
-      <div class="content">
+        <div class="container-fluid " >
+          <div class=" card card-header card-header-primary "style="background: linear-gradient(180deg, #64a3d6, #1c5196); margin-top:-5px;">
+            <h3 class="card-title" style="color:#fff;">Gestión general del sistema.</h3>
+            <p class="card-category" style="color:#fff;">En esta sección es posible ver los reportes del sistema. <br> Además con la opción ver detalle, puede conocer más información del mismo.</p>
+          </div>
+        </div>
+
       <div class="container-fluid">
         <div class="row">
 
@@ -11,17 +17,17 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-header card-header-warning card-header-icon">
-                <div class="card-icon">
-                  <i class="material-icons">content_copy</i>
+                <div class="card-icon" style="    background: linear-gradient(180deg, #64a3d6, #1c5196);">
+                  <i class="material-icons">person</i>
                 </div>
                 <p class="card-category">Verificaciones Pendientes</p>
-                <h3 class="card-title">5
+                <h3 class="card-title">{{$usersPendingToValidate}}
                   <small>Solicitudes</small>
                 </h3>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <a href="#pablo">Gestionar Solicitudes</a>
+                  <a href="{{url('users?v=2')}}">Gestionar Solicitudes</a>
                 </div>
               </div>
             </div>
@@ -31,15 +37,15 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-header card-header-success card-header-icon">
-                <div class="card-icon">
-                  <i class="material-icons">store</i>
+                <div class="card-icon" style="    background: linear-gradient(180deg, #64a3d6, #1c5196);">
+                  <i class="material-icons">content_paste</i>
                 </div>
                 <p class="card-category">Transacciones Solicitadas</p>
-                <h3 class="card-title">3 <small> Solicitudes</small></h3>
+                <h3 class="card-title">{{$pendingTransactionsAmount}} <small> Solicitudes</small></h3>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <a href="#pablo">Gestionar Solicitudes</a>
+                  <a href="{{url('transactions?v=3')}}">Gestionar Solicitudes</a>
                 </div>
               </div>
             </div>
@@ -48,15 +54,15 @@
           <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-header card-header-danger card-header-icon">
-                <div class="card-icon">
-                  <i class="material-icons">info_outline</i>
+                <div class="card-icon" style="    background: linear-gradient(180deg, #64a3d6, #1c5196);">
+                  <i class="material-icons">attach_money</i>
                 </div>
-                <p class="card-category">Depositos Solcitados</p>
-                <h3 class="card-title">7 <small>Solicitudes</small></h3>
+                <p class="card-category">Tasa de cambio activa</p>
+                <h5 class="card-title"><b>$ 1 USD ~ Bsf {{$finalMount}} VEF</b </h5>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <a href="#pablo">Gestionar Solicitudes</a>
+                  <a href="{{url('exchange_rates?v=5')}}">Gestionar tasas de cambio</a>
                 </div>
               </div>
             </div>

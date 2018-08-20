@@ -127,14 +127,14 @@
           @if(  app('request')->input('v') == '5' )
             <li class="nav-item active">
               <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}"  style="background-color:#191970; box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgb(89, 100, 150);">
-                <i class="material-icons"  style="color:white;">bubble_chart</i>
+                <i class="material-icons"  style="color:white;">attach_money</i>
                 <p class="sidebar_text_unselected">Tasas de cambio</p>
               </a>
             </li>
           @else
             <li class="nav-item ">
               <a class="nav-link" href="{{ url('exchange_rates/?v=5') }}">
-                <i class="material-icons"  style="color:white;">bubble_chart</i>
+                <i class="material-icons"  style="color:white;">attach_money</i>
                 <p class="sidebar_text_unselected">Tasas de cambio</p>
               </a>
             </li>
