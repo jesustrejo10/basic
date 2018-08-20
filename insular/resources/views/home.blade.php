@@ -95,16 +95,49 @@
                 <div class="ct-chart" id="websiteViewsChart"></div>
               </div>
               <div class="card-body">
-                <h4 id="shit" class="card-title">Email Subscriptions</h4>
-                <p class="card-category">Last Campaign Performance</p>
+                <h4 id="shit" class="card-title">Últimos depositos</h4>
+                <p class="card-category">Se puede ver un resumen de los últimos depositos realizados en el sistema.</p>
               </div>
               <div class="card-footer">
                 <div class="stats">
-                  <i class="material-icons">access_time</i> campaign sent 2 days ago
+                  <i class="material-icons">access_time</i> <span class="text-success">Actualizado</span>
                 </div>
               </div>
             </div>
           </div>
+          <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-header card-header-success card-header-icon">
+                <div class="card-icon" style="    background: linear-gradient(180deg, #64a3d6, #1c5196);">
+                  <i class="material-icons">content_paste</i>
+                </div>
+                <h3 class="card-title">Resumen Financiero</h3>
+              </div>
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Flujo Monetario de transacciones</label>
+                      <input type="text" class="form-control" value="$ {{$totalAmount}} USD" disabled>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Ganancia por transacciones</label>
+                      <input type="text" class="form-control" value="$ {{$totalFee}} USD" disabled>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="bmd-label-floating">Flujo monetario de depositos</label>
+                      <input type="text" class="form-control" value="$ {{$totalDeposit}} USD" disabled>
+                    </div>
+                  </div>
+              </div>
+
+            </div>
+          </div>
+          <!--
           <div class="col-md-4">
             <div class="card card-chart">
               <div class="card-header card-header-danger">
@@ -121,6 +154,7 @@
               </div>
             </div>
           </div>
+        -->
         </div>
       </div>
     </div>
@@ -130,6 +164,9 @@
 <script>
   var a = <?php echo json_encode($a ); ?>;
   var b = <?php echo json_encode($b );?>;
+  var c = <?php echo json_encode($c );?>;
+  var d = <?php echo json_encode($d );?>;
+
 </script>
 <script src="{{ asset('js/core/jquery.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/core/popper.min.js') }}" type="text/javascript"></script>

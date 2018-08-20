@@ -41,8 +41,27 @@ class HomeController extends Controller
       $baseMount = $lastExchangerate->bsf_mount_per_dollar;
       $finalMount = number_format($baseMount);
 
-      $transactionMovements = WalletTransaction::select()->where('total_amount','<','0')->take(10)->orderBy('id','desc')->get();
+      $transactionMovementProfit = WalletTransaction::select()->where('total_amount','<','0')->get();
+      $totalFee = 0;
+      $totalAmount = 0;
+      foreach($transactionMovementProfit as $movement){
+          $totalFee = $totalFee + $movement->fee;
+          $totalAmount = $totalAmount+ $movement->total_amount;
+      }
+      $totalAmount = $totalAmount *-1;
+      $totalFee = $totalFee *-1;
 
+
+      $depositMovementProfit = WalletTransaction::select()->where('total_amount','>','0')->where('refund','=','0')->get();
+      $totalDeposit = 0;
+      foreach($depositMovementProfit as $movement){
+          $totalDeposit = $totalDeposit + $movement->total_amount;
+      }
+
+      
+
+      //dd($depositMovementProfit);
+      $transactionMovements = WalletTransaction::select()->where('total_amount','<','0')->take(10)->orderBy('id','desc')->get();
       foreach($transactionMovements as $movement) {
           $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
           $movement->user = $user;
@@ -63,6 +82,8 @@ class HomeController extends Controller
           }
       }
 
+
+
       //dd($transactionMovements);
       $a=[];
       $b=[];
@@ -74,8 +95,37 @@ class HomeController extends Controller
 
       //dd($transactionMovements);
 
+      $depositMovements = WalletTransaction::select()->where('total_amount','>','0')->where('status','1')->take(10)->orderBy('id','desc')->get();
 
-      return view('home',compact('a','b','usersPendingToValidate','pendingTransactionsAmount','finalMount'));
+      foreach($depositMovements as $movement) {
+          $user = User::select()->where('wallet_id',$movement->wallet_id)->first();
+          $movement->user = $user;
+
+          if($movement->total_amount > 0){
+              if($movement->stripe_id != ""){
+                  $movement->movement_type = "Deposito";
+              }else{
+                  $transaction = Transaction::select()->where('movement_id',$movement->wallet_transaction_id_refund)->first();
+                  $movement->transaction = $transaction;
+                  $movement->movement_type = "Reintegro";
+              }
+          }else{
+              $transaction = Transaction::select()->where('movement_id',$movement->id)->first();
+              $movement->transaction = $transaction;
+              $movement->movement_type = "transferencia";
+
+          }
+      }
+
+      $c=[];
+      $d=[];
+      foreach ($depositMovements as $movement) {
+        array_push($c,"D");
+        array_push($d,$movement->total_amount);
+        // code...
+      }
+
+      return view('home',compact('a','b','c','d','totalFee','totalAmount','totalDeposit','usersPendingToValidate','pendingTransactionsAmount','finalMount'));
 
     }
 
