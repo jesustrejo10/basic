@@ -20,7 +20,7 @@
                    <div class="row">
                      <div class="col-md-6">
                        <div class="form-group">
-                         <label class="bmd-label-floating">Nombre Legal de la persona natural</label>
+                         <label class="bmd-label-floating">Nombre del títular</label>
                          <input type="text" class="form-control" value="{{$transaction->natural_person->legal_name}}" disabled>
                        </div>
                      </div>
@@ -82,14 +82,14 @@
                    <div class="row">
                      <div class="col-md-6">
                        <div class="form-group">
-                         <label class="bmd-label-floating">Monto en Bsf a transferir</label>
-                         <input type="email" class="form-control" value="Bsf {{$transaction->total_bsf_amount}}" disabled>
+                         <label class="bmd-label-floating">Monto en Bs a transferir</label>
+                         <input type="email" class="form-control" value="Bs {{$transaction->total_bsf_amount}}" disabled>
                        </div>
                      </div>
                      <div class="col-md-6">
                        <div class="form-group">
-                         <label class="bmd-label-floating">Valor del Bolivar contra el Dolar</label>
-                         <input type="text" class="form-control" value="Bsf {{$transaction->exchange_rate_value}} por Dolar" disabled>
+                         <label class="bmd-label-floating">Tasa de cambio vigente</label>
+                         <input type="text" class="form-control" value="Bs {{$transaction->exchange_rate_value}} por Dolar" disabled>
                        </div>
                      </div>
                    </div>

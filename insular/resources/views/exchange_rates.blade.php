@@ -17,7 +17,7 @@
 
       <div>
         <div class="card-body">
-          <h3>Tasa de cambio actual <b>$ 1 USD ~ Bsf {{$lastExchangerate->mount_per_dollar}} VEF</b></h3>
+          <h3>Tasa de cambio actual <b>$ 1 USD ~ Bs {{$lastExchangerate->mount_per_dollar}}</b></h3>
           <br><br>
           <form method="get" action="{{ url('/exchange_rates/generate') }}" >
             <h5 class="card-title">Generar nueva tasa de cambio. (<b>sustituira a la actual</b>)</h4>
@@ -25,7 +25,11 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label class="bmd-label-floating">Valor del bolivar contra el dolar expresado en Bolivares Fuertes </label>
-                  <input type="number" name="bsf_mount_per_dollar" class="form-control" min="1" step="1" onkeypress="return event.charCode >= 48 && event.charCode <= 57"required>
+                    <div>
+                      <label>Amount $
+                        <input type="number" placeholder="0.00" required name="bsf_mount_per_dollar" min="0" value="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$"
+                      </label>
+                    </div>
                 </div>
               </div>
               <div class = "col-md-6">

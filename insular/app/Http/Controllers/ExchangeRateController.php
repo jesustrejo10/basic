@@ -124,7 +124,7 @@ class ExchangeRateController extends Controller
       $lastExchangerate =  DB::table('exchange_rates')->orderBy('id', 'desc')->first();
 
       $baseMount = $lastExchangerate->bsf_mount_per_dollar;
-      $finalMount = number_format($baseMount);
+      $finalMount = $baseMount;
 
       $lastExchangerate->mount_per_dollar = $finalMount;
       $exchangeRates = ExchangeRate::select()->orderBy('id', 'desc')->get();

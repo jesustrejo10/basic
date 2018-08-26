@@ -39,7 +39,7 @@ class HomeController extends Controller
       $lastExchangerate =  DB::table('exchange_rates')->orderBy('id', 'desc')->first();
 
       $baseMount = $lastExchangerate->bsf_mount_per_dollar;
-      $finalMount = number_format($baseMount);
+      $finalMount = $baseMount;
 
       $transactionMovementProfit = WalletTransaction::select()->where('total_amount','<','0')->get();
       $totalFee = 0;
@@ -58,7 +58,7 @@ class HomeController extends Controller
           $totalDeposit = $totalDeposit + $movement->total_amount;
       }
 
-      
+
 
       //dd($depositMovementProfit);
       $transactionMovements = WalletTransaction::select()->where('total_amount','<','0')->take(10)->orderBy('id','desc')->get();

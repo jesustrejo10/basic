@@ -18,7 +18,7 @@
                 <th>Nombre del Emisor</th>
                 <th>Nombre del Receptor</th>
                 <th>Monto Usd</th>
-                <th>Monto Bsf</th>
+                <th>Monto Bs</th>
                 <th>Tasa de Cambio</th>
                 <th>Status</th>
                 <th>Fecha de Transaccion</th>
@@ -42,11 +42,11 @@
                     {{  $item->amount_usd }} Usd
                 </td>
                 <td>
-                  {{  $item->total_bsf_amount }} Bsf
+                  {{  $item->total_bsf_amount }} Bs
 
                 </td>
                 <td>
-                  {{  $item->exchange_rate_value }} Bsf por Usd
+                  {{  $item->exchange_rate_value }} Bs por Usd
                 </td>
                 <td>
                   @if($item->history->transaction_status_id =='1')

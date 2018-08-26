@@ -58,7 +58,7 @@
                   <i class="material-icons">attach_money</i>
                 </div>
                 <p class="card-category">Tasa de cambio activa</p>
-                <h5 class="card-title"><b>$ 1 USD ~ Bsf {{$finalMount}} VEF</b </h5>
+                <h5 class="card-title"><b>$ 1 USD ~ Bs {{$finalMount}}</b </h5>
               </div>
               <div class="card-footer">
                 <div class="stats">

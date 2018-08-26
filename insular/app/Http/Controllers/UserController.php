@@ -188,7 +188,7 @@ class UserController extends Controller
             $response = new BaseResponse();
 
             $response ->status = "500";
-            $response-> message = "Error, por favor verifica tu dirección de correo electrónico.";
+            $response-> message = "Error, por favor verifique su dirección de correo electrónico.";
 
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
@@ -209,7 +209,7 @@ class UserController extends Controller
                 $response = new BaseResponse();
 
                 $response ->status = "500";
-                $response-> message = "Error, por favor verifica tu contraseña.";
+                $response-> message = "Error, por favor verifique su contraseña.";
                 //$response-> data= "[]";
 
                 return json_encode($response,JSON_UNESCAPED_SLASHES);

@@ -49,7 +49,7 @@
   @else
     <div class="sidebar" data-color="orange" data-background-color="white" data-image="../assets/img/sidebar-1.jpg">
       <div class="logo">
-        <a class="simple-text logo-normal">
+        <a class="simple-text logo-normal" href="{{ url('home/?v=1') }}">
           Insular
         </a>
       </div>
@@ -141,7 +141,9 @@
           @endif
 
         </ul>
-        <img src="{{url('img/logo_white.png')}}"/>
+        <a  href="{{ url('home/?v=1') }}">
+          <img src="{{url('img/logo_white.png')}}"/>
+        </a>
       </div>
     </div>
   @endguest

@@ -114,7 +114,7 @@ class User extends Authenticatable
             $response = new BaseResponse();
 
             //$response-> data= "[]";
-            $response-> message = "The email sended is already registered, try another";
+            $response-> message = "La dirección de email enviada ya esta registrada, intente con otra.";
             $response ->status = "500";
 
             return json_encode($response,JSON_UNESCAPED_SLASHES);
@@ -468,7 +468,7 @@ class User extends Authenticatable
             $response = new BaseResponse();
 
             $response ->status = "500";
-            $response-> message = "Error, please check your email address.";
+            $response-> message = "Error, por favor verifique su dirección de correo.";
 
             return json_encode($response,JSON_UNESCAPED_SLASHES);
         }else{
@@ -492,7 +492,7 @@ class User extends Authenticatable
                 $response = new BaseResponse();
 
                 $response ->status = "501";
-                $response-> message = "Error, please check your password.";
+                $response-> message = "Error, por favor verifique su contraseña.";
                 //$response-> data= "[]";
 
                 return json_encode($response,JSON_UNESCAPED_SLASHES);
