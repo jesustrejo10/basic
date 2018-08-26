@@ -544,6 +544,7 @@ class User extends Authenticatable
                 }
 
                 if(!$savedImg){
+
                   $values = [
                       'first_name' => $request->get('first_name'),
                       'last_name' => $request->get('last_name'),
@@ -580,7 +581,6 @@ class User extends Authenticatable
                 $values = [
                     'first_name' => $request->get('first_name'),
                     'last_name' => $request->get('last_name'),
-                    'password' => $request->get('password'),
                     'country_id' => $request->get('country_id'),
                     'profile_img_url' =>  URL_UPLOAD.$filename
                 ];
@@ -588,7 +588,6 @@ class User extends Authenticatable
                 if(DB::update('update users set
                       first_name = \''.$values['first_name'].'\' ,
                       last_name = \''.$values['last_name'].'\' ,
-                      password = \''.$values['password'].'\' ,
                       country_id = '.$values['country_id'].' ,
                       profile_img_url = \''.$values['profile_img_url'].'\' where id = ?', [$userId])){
 

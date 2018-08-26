@@ -76,7 +76,11 @@
   $(document).ready(function() {
     // Javascript method's body can be found in assets/js/demos.js
     var myTable =
-    $('#pageTable').DataTable();
+    $('#pageTable').DataTable({
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json"
+      }
+    });
   });
 </script>
 
